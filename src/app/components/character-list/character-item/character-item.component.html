@@ -1,0 +1,9 @@
+<div
+  [ngClass]="{ active: activeCharacterIndex === index }"
+  class="list-group-item list-group-item-action"
+  (click)="onCharacterClicked()"
+>
+  <p class="list-group-item-heading font-weight-bold m-0">
+    {{ character.name }}
+  </p>
+</div>

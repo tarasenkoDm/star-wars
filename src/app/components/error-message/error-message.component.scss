@@ -1,0 +1,15 @@
+.alert {
+  position: absolute;
+  top: 2rem;
+  right: -30%;
+  width: 30%;
+  transition: right 1s;
+
+  span {
+    font-weight: bold;
+  }
+}
+
+.show {
+  right: 0;
+}
