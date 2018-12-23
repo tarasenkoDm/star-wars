@@ -3,30 +3,14 @@ import { Observable, forkJoin, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { HttpService } from './http.service';
-import { ICharacter } from '../app.component';
+import { ICharacter, IMovie } from '../app.component';
+import data from '../../assets/characters.json';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CharacterService {
-  private characters: { name: string; url: string }[] = [
-    {
-      name: "Luke Skywalker",
-      url: "https://swapi.co/api/people/1/"
-    },
-    {
-      name: "Darth Vader",
-      url: "https://swapi.co/api/people/4"
-    },
-    {
-      name: "Obi-wan Kenobi",
-      url: "https://swapi.co/api/people/unknown/"
-    },
-    {
-      name: "R2-D2",
-      url: "https://swapi.co/api/people/3/"
-    }
-  ];
+  private characters = data.characters;
 
   constructor(private httpService: HttpService) {}
 
@@ -41,10 +25,12 @@ export class CharacterService {
     );
   }
 
-  getFilms(urlsArr: string[]): Observable<{ title: string; release_date: string }[]> {
-    const obsArr = [];
-    urlsArr.forEach(url => obsArr.push(this.httpService.get(url)));
-    return forkJoin(obsArr).pipe(
+  getFilms(urls: string[]): Observable<IMovie[]> {
+    const requests = [];
+
+    urls.forEach(url => requests.push(this.httpService.get(url)));
+
+    return forkJoin(requests).pipe(
       map(response => response),
       catchError(err => throwError(err))
     );

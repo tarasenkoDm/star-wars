@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./movies-item.component.scss']
 })
 export class MoviesItemComponent {
-  @Input() filmInfo: { title: string; release_date: string };
+  @Input() movie: { title: string; release_date: string };
 }

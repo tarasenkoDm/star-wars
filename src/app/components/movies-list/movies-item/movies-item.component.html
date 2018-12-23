@@ -1,10 +1,10 @@
-<div class="container">
+<div class="wrapper">
   <div class="row">
     <p class="col-md-4">Title:</p>
-    <p class="col-md-8 font-weight-bold">{{ filmInfo.title }}</p>
+    <p class="col-md-8 font-weight-bold">{{ movie.title }}</p>
   </div>
   <div class="row">
     <p class="col-md-4">Release Date:</p>
-    <p class="col-md-8">{{ filmInfo.release_date | date: "fullDate" }}</p>
+    <p class="col-md-8">{{ movie.release_date | date: "fullDate" }}</p>
   </div>
 </div>

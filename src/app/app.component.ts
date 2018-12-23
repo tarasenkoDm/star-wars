@@ -9,6 +9,11 @@ export interface ICharacter {
   url: string;
 }
 
+export interface IMovie {
+  title: string;
+  release_date: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,7 +22,7 @@ export interface ICharacter {
 export class AppComponent implements OnInit {
   isActiveSpinner = false;
   characters: ICharacter[];
-  films = [];
+  films: IMovie[] = [];
 
   constructor(
     private spinnerService: SpinnerService,
@@ -31,10 +36,12 @@ export class AppComponent implements OnInit {
     });
   }
 
-  requestMovies(index) {
-    this.characterService
-      .getCharacter(this.characters[index].url)
-      .pipe(mergeMap(info => this.characterService.getFilms(info['films'])))
-      .subscribe(films => (this.films = films), err => (this.films = []));
+  requestMovies(index: number) {
+    if (this.characters[index] && this.characters[index].url) {
+      this.characterService
+        .getCharacter(this.characters[index].url)
+        .pipe(mergeMap(info => this.characterService.getFilms(info['films'])))
+        .subscribe(films => (this.films = films), err => (this.films = []));
+    }
   }
 }

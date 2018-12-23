@@ -1,7 +1,7 @@
-div {
+.list-group-item {
   cursor: pointer;
 
-  .active p {
+  &.active p {
     color: #fff;
   }
 }
